@@ -78,12 +78,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard.users')" :active="request()->routeIs('dashboard.users')">
-                {{ __('Users') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard.products')" :active="request()->routeIs('dashboard.products')">
-                {{ __('Products') }}
-            </x-responsive-nav-link>
+            @admin
+                <x-responsive-nav-link :href="route('dashboard.users')" :active="request()->routeIs('dashboard.users')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('dashboard.products')" :active="request()->routeIs('dashboard.products')">
+                    {{ __('Products') }}
+                </x-responsive-nav-link>
+            @endadmin
         </div>
 
 
