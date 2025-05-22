@@ -16,6 +16,14 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+            @admin
+                <x-nav-link :href="route('dashboard.users')" :active="request()->routeIs('dashboard.users')">
+                    {{ __('Users') }}
+                </x-nav-link>
+                <x-nav-link :href="route('dashboard.products')" :active="request()->routeIs('dashboard.products')">
+                    {{ __('Products') }}
+                </x-nav-link>
+            @endadmin
             </div>
 
             <!-- Settings Dropdown -->
@@ -70,7 +78,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.users')" :active="request()->routeIs('dashboard.users')">
+                {{ __('Users') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.products')" :active="request()->routeIs('dashboard.products')">
+                {{ __('Products') }}
+            </x-responsive-nav-link>
         </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

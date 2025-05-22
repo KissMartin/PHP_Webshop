@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,9 +14,19 @@ Route::get('/', function () {
     return view('home', compact('products'));
 });
 
-Route::get('/dashboard', function () {
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
+
+
+Route::middleware(['auth', 'verified'])
+    ->prefix('dashboard')
+    ->name('dashboard.')
+    ->middleware(['admin'])
+    ->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('users');
+        Route::get('/products', [ProductController::class, 'index'])->name('products');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
