@@ -11,10 +11,14 @@ Route::get('/', function () {
     return view('home', compact('products'));
 });
 
+Route::middleware(['auth', 'verified'])->get('/home', function () {
+    return view('home');
+})->name('home');
 
-Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('users');
