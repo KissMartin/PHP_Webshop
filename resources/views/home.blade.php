@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <section class="w-screen bg-amber-950">
+    <section class="h-screen w-screen bg-amber-950">
         <div class="w-full h-3/5 flex justify-center items-center" id="Group1">
             <div class="w-7/12 h-full flex flex-col justify-center items-end pl-30 pr-10 space-y-10">
                 <div class="w-full">
