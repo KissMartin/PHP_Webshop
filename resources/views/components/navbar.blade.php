@@ -1,12 +1,11 @@
-<nav class="bg-white shadow p-4">
+<nav class="bg-gray-900 shadow p-4">
     <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-2xl font-bold">My Webshop</h1>
-        <ul class="flex space-x-4">
-            <li><a href="/" class="hover:text-blue-500">Home</a></li>
-            <li><a href="#" class="hover:text-blue-500">Products</a></li>
-            <li><a href="#" class="hover:text-blue-500">Cart</a></li>
-            <a href="{{ route('register') }}" class="hover:text-blue-500">Register</a>
-            <a href="{{ route('login') }}" class="hover:text-blue-500">Login</a>
+        <h1 class="text-3xl font-bold">HoneyHive</h1>
+        <ul class="flex space-x-4 text-lg">
+            <li><a href="/" class="py-2 px-5 hover:text-gray-400">Home</a></li>
+            <li><a href="#" class="py-2 px-5 hover:text-gray-400">Cart</a></li>
+            <li><a href="{{ route('login') }}" class="py-2 px-5 hover:text-gray-400 font-semibold">Sign in</a></li>
+            {{-- <a href="{{ route('login') }}" class="hover:text-blue-500">Login</a> --}}
         </ul>
     </div>
 </nav>

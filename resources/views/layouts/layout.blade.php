@@ -6,11 +6,11 @@
     <title>My Webshop</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-800 text-gray-200 overflow-x-hidden">
     <x-navbar />
 
     @yield('content')
     
-    <x-footer />
+    {{-- <x-footer /> --}}
 </body>
 </html>

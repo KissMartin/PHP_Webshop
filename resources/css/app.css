@@ -10,3 +10,35 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+*{
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function) /* cubic-bezier(0.4, 0, 0.2, 1) */);
+    transition-duration: var(--tw-duration, var(--default-transition-duration) /* 150ms */);
+}
+
+#Group1 {
+    background: url("/public/images/CrazyBackground.png");
+    background-size: cover;
+    background-position-y: -15rem;
+    position: relative;
+}
+
+#Group1 > *{
+    z-index: 10;
+}
+
+#Group1::before{
+    content: '';
+    position: absolute;
+
+    z-index: 0;
+
+    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+
+    width: 100%;
+    height: 100%;
+}
