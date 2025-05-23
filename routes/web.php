@@ -1,16 +1,13 @@
 <?php
 
+use App\Models\Product;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\ProductController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $products = [
-        (object)[ 'name' => 'Product A', 'description' => 'Nice item', 'price' => 19.99, 'image_url' => null ],
-        (object)[ 'name' => 'Product B', 'description' => 'Better item', 'price' => 29.99, 'image_url' => null ],
-        (object)[ 'name' => 'Product C', 'description' => 'Best item', 'price' => 39.99, 'image_url' => null ],
-    ];
+    $products = Product::All();
     return view('home', compact('products'));
 });
 
