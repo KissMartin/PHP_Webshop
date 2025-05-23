@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\Product;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\ProductController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $praiseCards = [
@@ -12,11 +13,7 @@ Route::get('/', function () {
         (object)[ 'title' => 'Streamlined End-to-End Solutions', 'content' => 'Simplify your workflow with integrated tools for sourcing, order management, payments, and logistics—all in one platform.' ],
         (object)[ 'title' => 'Customized Growth Support', 'content' => 'Unlock tailored advantages like priority discounts, dedicated assistance, and enhanced safeguards to accelerate your business growth.' ],
     ];
-    $products = [
-        (object)[ 'name' => 'Product A', 'description' => 'Nice item', 'price' => 19.99, 'image_url' => null ],
-        (object)[ 'name' => 'Product B', 'description' => 'Better item', 'price' => 29.99, 'image_url' => null ],
-        (object)[ 'name' => 'Product C', 'description' => 'Best item', 'price' => 39.99, 'image_url' => null ],
-    ];
+    $products = Product::All();
     return view('home', compact('products', 'praiseCards'));
 });
 
