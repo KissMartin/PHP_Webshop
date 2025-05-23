@@ -2,7 +2,7 @@
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-3xl font-bold"><a href="/" class="py-2 px-5 hover:text-gray-400">HoneyHive</a></h1>
         <ul class="flex space-x-4 text-lg">
-            <li><a href="#" class="py-2 px-5 hover:text-gray-400">Cart</a></li>
+            <li><a href="{{ route('cart') }}" class="py-2 px-5 hover:text-gray-400">Cart</a></li>
             @if (Auth::check())
                 <x-profile-menu />
             @else

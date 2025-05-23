@@ -8,7 +8,6 @@ class Order extends Model
 {
     protected $fillable = ['user_id', 'status', 'total_price'];
 
-    // Link back to the user
     public function user()
     {
         return $this->belongsTo(User::class);
