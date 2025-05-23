@@ -6,27 +6,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\ProductController;
 
-Route::get('/', function () {
-    $praiseCards = [
-        (object)[ 'title' => 'Vast Global Marketplace', 'content' => 'Discover millions of products and reliable suppliers worldwide to meet your business needs.' ],
-        (object)[ 'title' => 'Secure Quality Assurance', 'content' => 'Source confidently from verified suppliers, with transaction safeguards covering payment, shipping, and delivery.' ],
-        (object)[ 'title' => 'Streamlined End-to-End Solutions', 'content' => 'Simplify your workflow with integrated tools for sourcing, order management, payments, and logistics—all in one platform.' ],
-        (object)[ 'title' => 'Customized Growth Support', 'content' => 'Unlock tailored advantages like priority discounts, dedicated assistance, and enhanced safeguards to accelerate your business growth.' ],
-    ];
+use App\Http\Controllers\HomeController;
 
-    return view('home', compact('praiseCards'));
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth', 'verified'])->get('/home', function () {
-    $praiseCards = [
-        (object)[ 'title' => 'Vast Global Marketplace', 'content' => 'Discover millions of products and reliable suppliers worldwide to meet your business needs.' ],
-        (object)[ 'title' => 'Secure Quality Assurance', 'content' => 'Source confidently from verified suppliers, with transaction safeguards covering payment, shipping, and delivery.' ],
-        (object)[ 'title' => 'Streamlined End-to-End Solutions', 'content' => 'Simplify your workflow with integrated tools for sourcing, order management, payments, and logistics—all in one platform.' ],
-        (object)[ 'title' => 'Customized Growth Support', 'content' => 'Unlock tailored advantages like priority discounts, dedicated assistance, and enhanced safeguards to accelerate your business growth.' ],
-    ];
-
-    return view('home', compact('praiseCards'));
-});
+Route::middleware(['auth', 'verified'])->get('/home', [HomeController::class, 'index']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('users');
