@@ -1,4 +1,4 @@
-<div class="bg-white p-4 rounded shadow">
+<div class="bg-gray-800 p-4 rounded shadow">
     <img src="{{ $image ?? 'https://via.placeholder.com/300' }}" alt="{{ $name }}" class="w-full h-48 object-cover mb-4">
     <h4 class="text-xl font-semibold">{{ $name }}</h4>
     <p class="text-gray-700 mb-2">{{ $description }}</p>
