@@ -57,4 +57,23 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function orders(): View
+    {
+        $orders = auth()->user()->orders;
+        return view('profile.orders', compact('orders'));
+    }
+
+    public function favorites(): View
+    {
+        $favorites = auth()->user()->favorites;
+        return view('profile.favorites', compact('favorites'));
+    }
+
+    public function products(): View
+    {
+        $products = auth()->user()->products;
+        return view('profile.products', compact('products'));
+    }
+
 }
