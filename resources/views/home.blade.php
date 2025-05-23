@@ -10,7 +10,8 @@
                 </div>
                 <div class="bg-gray-800 h-[4rem] w-full flex rounded-4xl items-center justify-center">
                     <input class="rounded-l-4xl h-full w-full text-2xl pl-5" type="text" placeholder="Search for your favourite items!">
-                    <button class="rounded-3xl h-[80%] w-[8rem] bg-orange-700 text-xl mx-2 my-2 cursor-pointer hover:bg-orange-600">Search</button>
+                    {{-- <button class="rounded-3xl h-[80%] w-[8rem] bg-orange-700 text-2xl mx-2 cursor-pointer hover:bg-orange-600">Search</button> --}}
+                    <a href="{{ route('products') }}" class="h-[80%] w-[8rem] bg-orange-700 rounded-3xl text-2xl mx-2 cursor-pointer flex items-center justify-center hover:bg-orange-600">Search</a>
                 </div>
             </div>
             <div class="w-5/12 h-full"></div>
