@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class WebsiteController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
@@ -17,21 +17,5 @@ class WebsiteController extends Controller
         ];
 
         return view('home', compact('praiseCards'));
-    }
-
-    public function products()
-    {
-        $products = Product::all();
-        return view('products', compact('products'));
-    }
-
-    public function viewProduct(Product $product)
-    {
-        return view('item', compact('product'));
-    }
-
-    public function cart()
-    {
-        return view('cart');
     }
 }
