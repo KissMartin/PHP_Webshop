@@ -45,6 +45,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('home', absolute: false));
+        $redirect = $request->input('redirect');
+        if ($redirect && filter_var($redirect, FILTER_VALIDATE_URL)) {
+            return redirect()->to($redirect);
+        }
+
+        return redirect()->intended(route('home', absolute: false));
     }
 }
