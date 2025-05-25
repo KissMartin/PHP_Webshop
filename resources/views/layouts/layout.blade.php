@@ -13,5 +13,7 @@
     @yield('content')
     
     <x-footer />
+
+    <x-my-modal />
 </body>
 </html>

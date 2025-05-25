@@ -41,5 +41,50 @@ function loopTypewriter(elementId, texts, writeSpeed = 50, deleteSpeed = 50, pau
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("LearnMoreBtn").addEventListener("click", function() {
+        openModal({
+            title: "Learn More about HoneyHive",
+            content: "<video width='100%' height='auto' autoplay controls><source src='/videos/LearnMore.mp4' type='video/mp4'>Your browser does not support the video tag.</video>"
+        });
+    });
     loopTypewriter("typewriter", typeList, writeSpeed, deleteSpeed, pauseTime, startingWord);
 });
+
+function openModal(options = {}){
+    const modal = document.getElementById('modal-overlay');
+
+    var title = document.getElementById("modal-title");
+    if (options.title) {
+        title.textContent = options.title;
+    }
+
+    var content = document.getElementById("modal-content")
+    content.innerHTML = options.content || 'No content here :(';
+
+    const closeBtn = document.getElementById("modal-button");
+    closeBtn.onclick = () => {
+        stopVideos();
+        title.innerHTML = '';
+        content.innerHtml = '';
+        modal.style.display = 'none';
+    }
+
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            stopVideos();
+            title.innerHTML = '';
+            content.innerHtml = '';
+            modal.style.display = 'none';
+        }
+    };
+
+    modal.style.display = 'flex';
+}
+
+function stopVideos(){
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+    });
+}

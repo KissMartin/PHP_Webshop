@@ -1,4 +1,4 @@
-<nav class="bg-gradient-to-b from-[rgba(0,0,0,0.8)] from-30 to-transparent text-white p-4 fixed w-screen top-0 left-0 z-100">
+<nav class="bg-gradient-to-b from-[rgba(0,0,0,0.8)] from-30 to-transparent text-white p-4 fixed w-screen top-0 left-0 z-40">
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-3xl font-bold"><a href="/" class="py-2 px-5 hover:text-gray-400">HoneyHive</a></h1>
         <ul class="flex space-x-4 text-lg">
