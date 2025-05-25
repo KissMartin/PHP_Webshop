@@ -14,6 +14,7 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::controller(ProductController::class)->prefix('products')->group(function () {
     Route::get('/', 'index')->name('products');
+    Route::get('/filter', 'filter')->name('products.filter');
     Route::get('/{product}', 'show')->name('product.show');
 });
 

@@ -1,13 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Users3') }}
-        </h2>
-    </x-slot>
+@extends('layouts.layout')
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Users table here -->
-        </div>
-    </div>
-</x-app-layout>
+@section('content')
+
+<div class="my-50">
+    <h1>This is the Favorites page</h1>
+</div>
+
+@endsection
