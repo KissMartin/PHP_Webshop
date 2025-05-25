@@ -1,7 +1,10 @@
 <div class="bg-gray-800 p-4 rounded shadow">
-    <img src="{{ $image ?? 'https://via.placeholder.com/300' }}" alt="{{ $name }}" class="w-full h-48 object-cover mb-4">
+    {{-- <img src="{{ $image ?? 'https://placehold.co/300' }}" alt="{{ $name }}" class="w-full h-48 object-cover mb-4"> --}}
+    <img src="{{ 'https://placehold.co/300' }}" alt="{{ $name }}" class="w-full h-48 object-cover mb-4">
     <h4 class="text-xl font-semibold">{{ $name }}</h4>
-    <p class="text-gray-700 mb-2">{{ $description }}</p>
+    <p class="text-gray-500 mb-2">{{ $description }}</p>
     <span class="text-lg font-bold">{{ number_format($price, 2) }} $</span>
-    <button class="mt-2 block w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Add to Cart</button>
+    <x-primary-button class="block w-full mt-2 text-4xl">
+        {{ __('Add to Cart') }}
+    </x-primary-button>
 </div>

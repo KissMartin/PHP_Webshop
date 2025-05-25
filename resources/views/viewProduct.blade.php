@@ -51,9 +51,9 @@
 
             <form action="{{ route('cart.store', $product->id) }}" method="POST" class="w-full max-w-xs">
                 @csrf
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition duration-200">
-                    Add to Cart
-                </button>
+                <x-primary-button class="w-full">
+                    {{__("Add to Cart")}}
+                </x-primary-button>
             </form>
         </div>
     </div>
