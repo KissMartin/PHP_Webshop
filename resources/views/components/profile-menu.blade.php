@@ -16,7 +16,7 @@
             {{ __('Profile') }}
         </x-dropdown-link>
 
-        @admin
+        {{-- @admin
             <x-dropdown-link :href="route('admin.users')">
                 {{ __('List Users') }}
             </x-dropdown-link>
@@ -33,7 +33,7 @@
             <x-dropdown-link :href="route('profile.favorites')">
                 {{ __('Favorites') }}
             </x-dropdown-link>
-        @endadmin
+        @endadmin --}}
 
         <!-- Authentication -->
         <form method="POST" action="{{ route('logout') }}">
