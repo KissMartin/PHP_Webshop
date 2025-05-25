@@ -9,10 +9,10 @@
             <p class="text-center text-lg text-gray-400">No products available right now.</p>
         @else
             <div class="w-full min-h-screen flex gap-8">
-                <div class="w-1/5 m-4 rounded-2xl bg-gray-800 px-10 py-5">
-                    <h1 class="text-left text-4xl mb-2">Filters</h1>
-                    <hr>
-                    <ul class="text-lg space-y-1.5 mt-2">
+                <div class="w-1/5 m-4 rounded-2xl bg-gray-800 px-10 py-5 max-h-fit">
+                    <h1 class="text-left text-4xl">Filters</h1>
+                    <hr class="my-2">
+                    <ul class="text-lg space-y-1.5">
                         <li>
                             <input type="checkbox" name="Gaming" id="Gaming"></input>
                             <label for="Gaming">Gaming</label>
@@ -34,6 +34,7 @@
                             <label for="Clothes">Clothes</label>
                         </li>
                     </ul>
+                    <hr class="my-2">
                 </div>
                 <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 m-4">
                     @foreach ($products as $product)
