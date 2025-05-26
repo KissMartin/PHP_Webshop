@@ -3,9 +3,10 @@
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -48,11 +49,17 @@ Route::middleware('auth')
             Route::get('/products', 'products')->name('products');
 });
 
-// Todo: Admin related stuff
-// Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-//     Route::get('users', [AdminController::class, 'users'])->name('admin.users');
-//     Route::get('orders', [AdminController::class, 'orders'])->name('admin.orders');
-// });
+Route::prefix('admin')
+    ->middleware(['auth', 'admin'])
+    ->controller(AdminUserController::class)
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+    Route::get('/dashboard', 'index')->name('dashboard');
+    Route::get('/users', 'users')->name('users');
+    Route::get('/products', 'products')->name('products');
+    Route::get('/orders', 'orders')->name('orders');
+});
 
 
 require __DIR__.'/auth.php';
