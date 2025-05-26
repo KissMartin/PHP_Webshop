@@ -36,13 +36,13 @@ $databaseConfig = @{
 
 # Loop through each key-value pair in the $databaseConfig hash table
 foreach ($key in $databaseConfig.Keys) {
-    # Create a regex pattern to match the commented out lines
-    $pattern = "^#\s*$key=.*"
+    # Create a regex pattern to match the commented-out or active line for each setting
+    $pattern = "^#?\s*$key=.*"
 
-    # Replace the commented lines with the new value and uncomment them
+    # Replace the old values (or uncomment and set) with the new values
     $envContent = $envContent | ForEach-Object {
         if ($_ -match $pattern) {
-            $_ -replace "^#\s*$key=.*", "$key=$($databaseConfig[$key])"
+            $_ -replace "^#?\s*$key=.*", "$key=$($databaseConfig[$key])"
         } else {
             $_
         }
@@ -51,6 +51,7 @@ foreach ($key in $databaseConfig.Keys) {
 
 # Write the updated content back to the .env file
 $envContent | Set-Content .env
+Write-Host ".env file updated with MySQL configuration."
 
 # Step 4: Install PHP dependencies (composer)
 Write-Host "Installing PHP dependencies (composer)..."
