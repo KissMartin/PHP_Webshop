@@ -41,7 +41,8 @@ Route::middleware('auth')
     ->controller(ProfileController::class)
     ->group(
         function () {
-            Route::get('/', 'edit')->name('edit');
+            Route::get('/', 'profile')->name('profile');
+            Route::get('/edit', 'edit')->name('edit');
             Route::patch('/', 'update')->name('update')->middleware('throttle:5,1');
             Route::delete('/', 'destroy')->name('destroy')->middleware('throttle:3,1');
             Route::get('/orders', 'orders')->name('orders');
@@ -59,6 +60,9 @@ Route::prefix('admin')
     Route::get('/users', 'users')->name('users');
     Route::get('/products', 'products')->name('products');
     Route::get('/orders', 'orders')->name('orders');
+    Route::get('/products/{product}/edit', 'edit')->name('products.edit');
+    Route::delete('/products/{product}', 'destroy')->name('products.destroy');
+
 });
 
 

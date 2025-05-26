@@ -8,17 +8,23 @@
 
     <x-slot name="content">
         <x-dropdown-link :href="route('profile.edit')">
-            {{ __('Profile') }}
+            {{ __('Security') }}
         </x-dropdown-link>
 
         @admin
             <x-dropdown-link :href="route('admin.users')">
                 {{ __('List Users') }}
             </x-dropdown-link>
+            <x-dropdown-link :href="route('admin.products')">
+                {{ __('List Products') }}
+            </x-dropdown-link>
             <x-dropdown-link :href="route('admin.orders')">
                 {{ __('List All Orders') }}
             </x-dropdown-link>
         @else
+            <x-dropdown-link :href="route('profile.profile')">
+                {{ __('Profile') }}
+            </x-dropdown-link>
             <x-dropdown-link :href="route('profile.orders')">
                 {{ __('My Orders') }}
             </x-dropdown-link>

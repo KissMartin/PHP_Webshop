@@ -76,4 +76,8 @@ class ProfileController extends Controller
         return view('profile.products', compact('products'));
     }
 
+    public function profile(): View
+    {
+        return view('profile.profile');
+    }
 }

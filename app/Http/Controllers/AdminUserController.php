@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
@@ -62,16 +64,30 @@ class AdminUserController extends Controller
         //
     }
 
-    public function users()
+    public function users(Request $request)
     {
-        // Logic to fetch and display users
-        return view('admin.users');
+        $search = $request->input('user_search');
+
+        $users = User::with('products')
+            ->when($search, fn($query) =>
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+            )
+            ->get();
+
+        return view('admin.users', compact('users'));
     }
 
-    public function products()
+
+    public function products(Request $request)
     {
-        // Logic to fetch and display products
-        return view('admin.products');
+        $search = $request->input('product_search');
+    
+        $products = Product::when($search, fn($query) => $query->where('name', 'like', "%$search%"))
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(15);
+
+        return view('admin.products', compact('products'));
     }
 
     public function orders()
