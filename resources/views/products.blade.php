@@ -8,10 +8,12 @@
 
 <section class="min-h-screen bg-gray-900 py-20 pt-24 text-white">
     <div class="container mx-auto px-4">
-        <h1 class="text-4xl font-bold mb-10 text-center">Browse All Products</h1>
-        @if ($search)
-            <h2 class="text-2xl mb-4">Results for "{{ $search }}"</h2>
-        @endif
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2 text-center">Browse All Products</h1>
+            @if ($search)
+                <h2 class="text-2xl text-center text-gray-500">Results for "{{ $search }}"</h2>
+            @endif
+        </div>
 
 
         @if ($products->isEmpty())

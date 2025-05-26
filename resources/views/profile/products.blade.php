@@ -2,6 +2,6 @@
 
 @section('content')
 
-<div class="my-50"><h1>This is the Products page</h1></div>
+<div class="my-50"><h1></h1></div>
 
 @endsection
