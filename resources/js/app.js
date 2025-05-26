@@ -61,11 +61,14 @@ function ProductsPage() {
     let totalFilters = categoryFilters.length;
 
     function updateFilterVisibility() {
+        shownFilters= Math.max(firstShownAmount, Math.min(shownFilters, totalFilters));
+
         categoryFilters.forEach((filter, index) => {
             if (index < shownFilters) {
                 filter.style.display = 'block';
             } else {
-                filter.style.display = 'none';
+                if(!filter.childNodes[1].checked)
+                    filter.style.display = 'none';
             }
         });
 
@@ -76,20 +79,14 @@ function ProductsPage() {
 
     moreFiltersButton.addEventListener('click', () => {
         shownFilters += incrementAmount;
-        if (shownFilters > totalFilters) {
-            shownFilters = totalFilters;
-        }
         updateFilterVisibility();
     });
 
     lessFiltersButton.addEventListener('click', () => {
         shownFilters -= incrementAmount;
-        if (shownFilters < firstShownAmount) {
-            shownFilters = firstShownAmount;
-        }
         updateFilterVisibility();
     });
-    
+
     document.querySelectorAll('.filter-category').forEach(filter => {
         filter.addEventListener('click', () => {
             const checkbox = filter.querySelector('input[type="checkbox"]');
