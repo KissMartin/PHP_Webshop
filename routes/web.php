@@ -4,9 +4,10 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\UserProductController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -47,8 +48,22 @@ Route::middleware('auth')
             Route::delete('/', 'destroy')->name('destroy')->middleware('throttle:3,1');
             Route::get('/orders', 'orders')->name('orders');
             Route::get('/favorites', 'favorites')->name('favorites');
-            Route::get('/products', 'products')->name('products');
 });
+
+Route::middleware('auth')
+    ->prefix('profile')
+    ->name('profile.')
+    ->controller(UserProductController::class)
+    ->group(
+        function () {
+            Route::get('/products', 'index')->name('products');
+            Route::post('/products', 'store')->name('products.store');
+            Route::delete('/products/{product}', 'destroy')->name('products.destroy');
+            Route::get('/products/{product}/edit', 'edit')->name('products.edit');
+            Route::patch('/products/{product}', 'update')->name('products.update');
+});
+
+
 
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])

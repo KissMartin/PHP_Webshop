@@ -13,9 +13,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::all();
         $search = $request->input('search');
         $products = $this->buildFilteredQuery($search)->get();
+
+        $categories = Category::whereHas('products')->get();
 
         return view('products', [
             'products' => $products,
@@ -23,7 +24,6 @@ class ProductController extends Controller
             'search' => $search,
         ]);
     }
-
 
     /**
      * Show the form for creating a new resource.

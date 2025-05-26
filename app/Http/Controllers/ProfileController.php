@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -58,6 +58,11 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    public function store(Request $request)
+    {
+        //
+    }
+
     public function orders(): View
     {
         $orders = auth()->user()->orders;
@@ -68,12 +73,6 @@ class ProfileController extends Controller
     {
         $favorites = auth()->user()->favorites;
         return view('profile.favorites', compact('favorites'));
-    }
-
-    public function products(): View
-    {
-        $products = auth()->user()->products;
-        return view('profile.products', compact('products'));
     }
 
     public function profile(): View
