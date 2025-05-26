@@ -4,7 +4,7 @@
     @endphp
     <div class="container mx-auto flex justify-between items-center h-12">
         <h1 class="text-3xl font-bold"><a href="/" class="py-2 px-5 hover:text-gray-400">HoneyHive</a></h1>
-        @if (Route::currentRouteName() != "home")
+        @if (Str::Contains(Route::currentRouteName(), 'product'))
             <div class="w-1/2">
                 <x-searchbar/>
             </div>

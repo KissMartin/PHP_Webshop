@@ -11,17 +11,12 @@ Alpine.start();
 document.addEventListener("DOMContentLoaded", () => {
     const modal = new Modal();
 
-    switch (window.location.pathname) {
-        case '/':
-            HomePage();
-            break;
-        case '/products':
-            ProductsPage();
-            break;
-        default:
-            console.warn('No specific page setup found for:', window.location.pathname);
+    var path = window.location.pathname;
+    if(path.includes('products')) {
+        ProductsPage();
+    }else{
+        HomePage();
     }
-
 });
 
 function ProductsPage() {
