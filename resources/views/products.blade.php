@@ -24,14 +24,20 @@
                     <h1 class="text-left text-4xl">Filters</h1>
                     <hr class="my-2">
                     <form method="GET" action="{{ route('products.filter') }}">
-                        <ul class="text-lg space-y-1.5">
-                            @foreach ($categories as $category)
-                                <li>
-                                    <input type="checkbox" name="categories[]" id="category-{{ $category->id }}" value="{{ $category->id }}" @if(request('categories') && in_array($category->id, request('categories'))) checked @endif>
-                                    <label for="category-{{ $category->id }}">{{ $category->name }}</label>
-                                </li>
-                            @endforeach
-                        </ul>
+                        <div>
+                            <ul class="text-lg space-y-1.5">
+                                @foreach ($categories as $category)
+                                    <li class="filter-category">
+                                        <input type="checkbox" class="cursor-pointer" name="categories[]" id="category-{{ $category->id }}" value="{{ $category->id }}" @if(request('categories') && in_array($category->id, request('categories'))) checked @endif>
+                                        <label class="cursor-pointer" for="category-{{ $category->id }}">{{ $category->name }}</label>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div class="flex justify-between items-center italic text-sm my-2 text-gray-400">
+                                <div id="more-filters-btn" class="text-left cursor-pointer">Show more</div>
+                                <div id="less-filters-btn" class="text-right cursor-pointer">Show less</div>
+                            </div>
+                        </div>
                         <hr class="my-2">
                         <input type="hidden" name="search" value="{{ request('search') }}">
                         <button type="submit" class="block w-full rounded-3xl h-[2.5rem] bg-orange-700 text-xl cursor-pointer hover:bg-orange-600">Filter</button>
