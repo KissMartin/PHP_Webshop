@@ -28,6 +28,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = $request->user();
+        if ($user->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+
         $redirect = $request->input('redirect');
         if ($redirect && filter_var($redirect, FILTER_VALIDATE_URL)) {
             return redirect()->to($redirect);
