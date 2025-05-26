@@ -9,7 +9,9 @@
                     <h1 class="text-5xl font-bold mt-2">The highest rated webshop of 2025</h1>
                 </div>
                 <div class="bg-gray-800 w-full flex rounded-4xl items-center justify-center">
-                    <x-searchbar/>
+                    <x-searchbar
+                        id="typewriter"
+                    />
                 </div>
             </div>
             <div class="w-5/12 h-full"></div>

@@ -2,7 +2,8 @@
     'method' => 'GET',
     'action' => route('products'),
     'inputName' => 'search',
-    'inputValue' => null, // Default to null, allowing for dynamic input value assignment of the search input 
+    'inputValue' => null, // Default to null, allowing for dynamic input value assignment of the search input
+    'id' => 'searchbar',
 ])
 
 <form 
@@ -15,7 +16,7 @@
     @endif
 
     <input 
-        id="typewriter" 
+        id="{{ $id }}" 
         name="{{ $inputName }}" 
         class="rounded-l-4xl text-lg pl-5 w-full focus:outline-none focus:border-transparent" 
         type="text" 
