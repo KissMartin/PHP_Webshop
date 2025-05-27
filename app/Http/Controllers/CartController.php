@@ -71,24 +71,27 @@ class CartController extends Controller
         DB::beginTransaction();
 
         try {
+            Log::info('Creating order with user ID: ' . $user->id . ', total: ' . $totalPrice);
             $order = Order::create([
                 'user_id' => $user->id,
-                'status' => 'processing',
+                'status' => 'pending',
                 'total_price' => $totalPrice,
             ]);
+            Log::info('Order created successfully', ['order_id' => $order->id]);
 
-            foreach ($cartItems as $item) {
+            foreach ($cartItems as $productId => $item) {
                 OrderItem::create([
                     'order_id' => $order->id,
-                    'product_id' => $item['id'],
+                    'product_id' => $productId,
                     'quantity' => $item['quantity'],
-                    'price_at_pruchase' => $item['price'],
+                    'price_at_purchase' => $item['price'],
                 ]);
             }
 
             DB::commit();
 
-            session()->forget('cart');
+            session()->forget("cart_user_{$userId}");
+            dd("$order");
 
             Mail::to($validated['email'])->send(new OrderReceiptMail($order, $user));
 
