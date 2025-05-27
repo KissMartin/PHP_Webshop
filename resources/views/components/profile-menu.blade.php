@@ -25,14 +25,12 @@
             <x-dropdown-link :href="route('profile.profile')">
                 {{ __('Profile') }}
             </x-dropdown-link>
-            <x-dropdown-link :href="route('profile.orders')">
+            {{-- Todo, commented out so it doesnt throw error --}}
+            {{-- <x-dropdown-link :href="route('profile.orders')">
                 {{ __('My Orders') }}
-            </x-dropdown-link>
+            </x-dropdown-link> --}}
             <x-dropdown-link :href="route('profile.products')">
                 {{ __('My Products') }}
-            </x-dropdown-link>
-            <x-dropdown-link :href="route('profile.favorites')">
-                {{ __('Favorites') }}
             </x-dropdown-link>
         @endadmin
 

@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <form action="" method="POST" class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <form action="{{ route('cart.create') }}" method="POST" class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 @csrf
                 <h2 class="text-xl font-semibold mb-4">Billing Details</h2>
 

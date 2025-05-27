@@ -11,7 +11,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!$request->user() || !$request->user()->is_admin) {
-            abort(403, 'Access denied.');
+            return redirect()->back();
         }
 
         return $next($request);

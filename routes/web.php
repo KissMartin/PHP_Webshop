@@ -22,19 +22,12 @@ Route::controller(ProductController::class)->prefix('products')->group(function 
 
 Route::controller(CartController::class)->prefix('cart')->group(function () {
     Route::get('/', 'index')->name('cart');
+    Route::post('/', 'createOrder')->name('cart.create');
     Route::post('/add/{product}', 'store')->name('cart.store');
     Route::delete('/remove/{product}', 'destroy')->name('cart.destroy');
 });
 
-// Route::get('/products', [WebsiteController::class, 'products'])->name('products');
-
 Route::middleware(['auth', 'verified'])->get('/home', [HomeController::class, 'index']);
-
-// TODO: Profile related stuff
-// Route::middleware(['auth', 'verified'])->group(function () {
-//         Route::get('/users', [UserController::class, 'index'])->name('users');
-//         Route::get('/products', [ProductController::class, 'index'])->name('products');
-// });
 
 Route::middleware('auth')
     ->prefix('profile')
@@ -46,11 +39,11 @@ Route::middleware('auth')
             Route::get('/edit', 'edit')->name('edit');
             Route::patch('/', 'update')->name('update')->middleware('throttle:5,1');
             Route::delete('/', 'destroy')->name('destroy')->middleware('throttle:3,1');
-            Route::get('/orders', 'orders')->name('orders');
-            Route::get('/favorites', 'favorites')->name('favorites');
+            // should move it to orderController later
+            // Route::get('/orders', 'orders')->name('orders');
 });
 
-Route::middleware('auth')
+Route::middleware(['auth', 'not_admin'])
     ->prefix('profile')
     ->name('profile.')
     ->controller(UserProductController::class)
@@ -63,20 +56,19 @@ Route::middleware('auth')
             Route::patch('/products/{product}', 'update')->name('products.update');
 });
 
-
-
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->controller(AdminUserController::class)
     ->prefix('admin')
     ->name('admin.')
-    ->group(function () {
-    Route::get('/dashboard', 'index')->name('dashboard');
-    Route::get('/users', 'users')->name('users');
-    Route::get('/products', 'products')->name('products');
-    Route::get('/orders', 'orders')->name('orders');
-    Route::get('/products/{product}/edit', 'edit')->name('products.edit');
-    Route::delete('/products/{product}', 'destroy')->name('products.destroy');
+    ->group(
+        function () {
+            Route::get('/dashboard', 'index')->name('dashboard');
+            Route::get('/users', 'users')->name('users');
+            Route::get('/products', 'products')->name('products');
+            Route::get('/orders', 'orders')->name('orders');
+            Route::get('/products/{product}/edit', 'edit')->name('products.edit');
+            Route::delete('/products/{product}', 'destroy')->name('products.destroy');
 
 });
 

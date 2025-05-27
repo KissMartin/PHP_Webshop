@@ -39,7 +39,7 @@
                                 <td class="px-4 py-2 border border-gray-600">{{ $product->name }}</td>
                                 
                                 <td class="px-4 py-2 border border-gray-600">
-                                    <a href="{{ route('admin.users', ['user-search' => $product->user->name]) }}" 
+                                    <a href="{{ route('admin.users', ['user_search' => $product->user->name]) }}" 
                                     class="text-orange-400 hover:text-orange-600">
                                         {{ $product->user->name }}
                                     </a>
@@ -56,12 +56,12 @@
                                     
                                     {{-- todo:
                                         {{ route('admin.products.edit', $product) }}
-                                        {{ route('admin.products.destroy', $product) }}
+                                        
                                     --}}
 
-                                    <a href="#" class="text-blue-400 hover:text-blue-600">Edit</a>
+                                    {{-- <a href="#" class="text-blue-400 hover:text-blue-600">Edit</a> --}}
                                     
-                                    <form action="#" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                    <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-400 hover:text-red-600">Delete</button>
