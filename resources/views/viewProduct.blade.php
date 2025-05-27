@@ -12,7 +12,7 @@
 
     <div class="flex flex-col md:flex-row md:space-x-8">
         <div class="md:w-1/2 mb-6 md:mb-0">
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto rounded-lg shadow-md object-cover">
+            <img src="{{ $product->image_url ?? 'https://placehold.co/300'}}" alt="{{ $product->name }}" class="w-full h-auto rounded-lg shadow-md object-cover">
         </div>
 
         <div class="md:w-1/2 flex flex-col justify-start">

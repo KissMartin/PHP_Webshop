@@ -12,10 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = new Modal();
 
     var path = window.location.pathname;
+    switch(path){
+        case "/":
+            HomePage();
+            break;
+        case "/products":
+            ProductsPage();
+            break;
+    }
     if(path.includes('products')) {
-        ProductsPage();
     }else{
-        HomePage();
     }
 });
 
