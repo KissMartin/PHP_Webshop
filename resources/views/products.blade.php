@@ -10,6 +10,14 @@
     <div class="container mx-auto px-4">
         <div class="mb-8">
             <h1 class="text-4xl font-bold mb-2 text-center">Browse All Products</h1>
+            <div class="mt-8">
+                <x-small-search-bar 
+                    :route="route('products')" 
+                    placeholder="Search products..." 
+                    name="search"
+                    :value="request('search')"
+                />
+            </div>
             @if ($search)
                 <h2 class="text-2xl text-center text-gray-500">Results for "{{ $search }}"</h2>
             @endif

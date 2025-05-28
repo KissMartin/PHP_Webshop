@@ -7,10 +7,6 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-dropdown-link :href="route('profile.edit')">
-            {{ __('Security') }}
-        </x-dropdown-link>
-
         @admin
             <x-dropdown-link :href="route('admin.users')">
                 {{ __('List Users') }}
@@ -25,14 +21,17 @@
             <x-dropdown-link :href="route('profile.profile')">
                 {{ __('Profile') }}
             </x-dropdown-link>
-            {{-- Todo, commented out so it doesnt throw error --}}
-            {{-- <x-dropdown-link :href="route('profile.orders')">
+            <x-dropdown-link :href="route('profile.orders')">
                 {{ __('My Orders') }}
-            </x-dropdown-link> --}}
+            </x-dropdown-link>
             <x-dropdown-link :href="route('profile.products')">
                 {{ __('My Products') }}
             </x-dropdown-link>
         @endadmin
+
+        <x-dropdown-link :href="route('profile.edit')">
+            {{ __('Settings') }}
+        </x-dropdown-link>
 
         <!-- Authentication -->
         <form method="POST" action="{{ route('logout') }}">

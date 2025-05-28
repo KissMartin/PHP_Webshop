@@ -89,24 +89,24 @@ class ProductController extends Controller
     }
 
     private function buildFilteredQuery(?string $search = null, array $selectedCategories = [])
-{
-    $query = Product::query();
+    {
+        $query = Product::query();
 
-    if ($search) {
-        $query->where(function ($q) use ($search) {
-            $q->where('name', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%");
-        });
-    }
-
-    if (!empty($selectedCategories)) {
-        foreach ($selectedCategories as $categoryId) {
-            $query->whereHas('categories', function ($q) use ($categoryId) {
-                $q->where('categories.id', $categoryId);
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
             });
         }
-    }
 
-    return $query;
-}
+        if (!empty($selectedCategories)) {
+            foreach ($selectedCategories as $categoryId) {
+                $query->whereHas('categories', function ($q) use ($categoryId) {
+                    $q->where('categories.id', $categoryId);
+                });
+            }
+        }
+
+        return $query;
+    }
 }

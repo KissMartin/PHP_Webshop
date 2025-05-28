@@ -9,7 +9,7 @@
             <h1 class="text-4xl font-bold">Admin - Products List</h1>
         </div>
 
-        <x-admin-search-bar 
+        <x-small-search-bar 
             :route="route('admin.products')" 
             placeholder="Search products..." 
             :value="request('product_search')" 

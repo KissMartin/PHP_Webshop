@@ -7,7 +7,6 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
-use App\Mail\OrderReceiptMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -91,11 +90,8 @@ class CartController extends Controller
             DB::commit();
 
             session()->forget("cart_user_{$userId}");
-            dd("$order");
 
-            Mail::to($validated['email'])->send(new OrderReceiptMail($order, $user));
-
-            return redirect()->route('profile.orders')->with('success', 'Order placed successfully! A receipt has been sent to your email.');
+            return redirect()->route('profile.orders')->with('success', 'Order placed successfully!');
 
         } catch (\Exception $e) {
             DB::rollBack();

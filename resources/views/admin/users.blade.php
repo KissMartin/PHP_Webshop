@@ -9,7 +9,7 @@
             <h1 class="text-4xl font-bold">Admin - User List</h1>
         </div>
 
-        <x-admin-search-bar 
+        <x-small-search-bar 
             :route="route('admin.users')" 
             placeholder="Search users..." 
             :value="request('user_search')" 

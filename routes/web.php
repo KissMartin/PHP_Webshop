@@ -4,6 +4,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminUserController;
@@ -39,9 +40,17 @@ Route::middleware('auth')
             Route::get('/edit', 'edit')->name('edit');
             Route::patch('/', 'update')->name('update')->middleware('throttle:5,1');
             Route::delete('/', 'destroy')->name('destroy')->middleware('throttle:3,1');
-            // should move it to orderController later
-            // Route::get('/orders', 'orders')->name('orders');
 });
+
+Route::middleware(['auth', 'verified'])
+    ->prefix('profile')
+    ->name('profile.')
+    ->controller(OrderController::class)
+    ->group(function () {
+        Route::get('/orders', 'index')->name('orders');
+        Route::patch('/orders/{order}/cancel', 'cancel')->name('orders.cancel');
+        Route::patch('/orders/{order}', 'updateStatus')->name('orders.update-status');
+    });
 
 Route::middleware(['auth', 'not_admin'])
     ->prefix('profile')
