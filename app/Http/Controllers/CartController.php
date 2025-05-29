@@ -47,6 +47,7 @@ class CartController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'address' => 'required|string|max:1000',
+            'payment_method' => 'required|in:card,cash',
         ]);
 
         $userId = auth()->id();
@@ -75,6 +76,7 @@ class CartController extends Controller
                 'user_id' => $user->id,
                 'status' => 'pending',
                 'total_price' => $totalPrice,
+                'payment_method' => $validated['payment_method'],
             ]);
             Log::info('Order created successfully', ['order_id' => $order->id]);
 

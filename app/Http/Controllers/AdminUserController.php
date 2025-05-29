@@ -14,7 +14,14 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $customers = User::count();
+        $orders = Order::count();
+        $products = Product::count();
+        $revenue = Order::where('status', 'paid')->sum('total_price');
+        $visitors = rand(1200, 3500);
+        $visitorChart = collect(range(1, 30))->map(fn() => rand(20, 100))->toArray();
+
+        return view('admin.dashboard', compact('customers', 'orders', 'products', 'revenue', 'visitors', 'visitorChart'));
     }
 
     /**

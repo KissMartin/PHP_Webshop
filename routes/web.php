@@ -37,10 +37,10 @@ Route::middleware('auth')
     ->group(
         function () {
             Route::get('/', 'profile')->name('profile');
-            Route::get('/{user}', 'profile')->name('public');
             Route::get('/edit', 'edit')->name('edit');
             Route::patch('/', 'update')->name('update')->middleware('throttle:5,1');
             Route::delete('/', 'destroy')->name('destroy')->middleware('throttle:3,1');
+            Route::get('/{user}', 'profile')->where('user', '[0-9]+')->name('public');
 });
 
 Route::middleware(['auth', 'verified'])
@@ -50,6 +50,7 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/orders', 'index')->name('orders');
         Route::patch('/orders/{order}/cancel', 'cancel')->name('orders.cancel');
+        Route::patch('/orders/{order}/pay', 'payNow')->name('orders.pay');
         Route::patch('/orders/{order}', 'updateStatus')->name('orders.update-status');
     });
 

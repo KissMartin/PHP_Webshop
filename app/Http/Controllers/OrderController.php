@@ -105,4 +105,16 @@ class OrderController extends Controller
 
         return back()->with('success', 'Order cancelled successfully.');
     }
+
+    public function payNow(Order $order)
+    {
+        if ($order->user_id !== auth()->id() || $order->payment_method !== 'cash' || $order->status !== 'pending') {
+            abort(403);
+        }
+
+        $order->status = 'paid';
+        $order->save();
+
+        return back()->with('success', 'Order paid successfully!');
+    }
 }
