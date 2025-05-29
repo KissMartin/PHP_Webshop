@@ -10,7 +10,12 @@
     <div class="w-full h-4/5 grid grid-cols-2 space-y-2">
         <div class="">
             <h1 class="text-3xl font-bold mb-2 h-1/12">{{ $product->name }}</h1>
-            <h1 class="text-md mb-2 text-gray-500 h-1/12">Uploaded by: {{ $product->author->name ?? 'Unknown' }}</h1>
+            <h1 class="text-md mb-2 text-gray-500 h-1/12">
+                Uploaded by: 
+                <a class="text-orange-400 underline" href="{{route('profile.public', $product->author->id)}}">
+                    {{ $product->author->name ?? 'Unknown' }}
+                </a>
+            </h1>
             <div class="w-full pr-10 h-10/12">
                 <img src="{{ $product->image_url ?? 'https://placehold.co/300'}}" alt="{{ $product->name }}" class="w-full h-auto rounded-lg shadow-md object-cover">
             </div>

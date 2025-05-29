@@ -14,14 +14,14 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="bg-gray-900 text-black overflow-x-hidden">
         {{-- <x-navbar/> --}}
-        <div class="bg-gray-900 text-white shadow p-4 fixed w-screen top-0 left-0 z-100">
+        <div class="bg-gradient-to-b from-[rgba(0,0,0,0.8)] from-30 to-transparent text-white p-4 fixed w-screen top-0 left-0 z-40">
             <div class="container mx-auto flex justify-between items-center">
                 <h1 class="text-2xl font-bold"><a href="/" class="py-2 px-5 hover:text-gray-400">HoneyHive</a></h1>
             </div>
         </div>
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-800">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white overflow-hidden sm:rounded-lg drop-shadow-xl drop-shadow-gray-900">
                 {{ $slot }}
             </div>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
+use \App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -75,8 +76,12 @@ class ProfileController extends Controller
         return view('profile.favorites', compact('favorites'));
     }
 
-    public function profile(): View
+    public function profile(User $user = null): View
     {
-        return view('profile.profile');
+        if($user === null) {
+            $user = auth()->user();
+        }
+
+        return view('profile.profile', compact('user'));
     }
 }

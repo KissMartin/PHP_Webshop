@@ -37,6 +37,7 @@ Route::middleware('auth')
     ->group(
         function () {
             Route::get('/', 'profile')->name('profile');
+            Route::get('/{user}', 'profile')->name('public');
             Route::get('/edit', 'edit')->name('edit');
             Route::patch('/', 'update')->name('update')->middleware('throttle:5,1');
             Route::delete('/', 'destroy')->name('destroy')->middleware('throttle:3,1');
