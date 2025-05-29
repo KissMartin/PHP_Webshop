@@ -76,10 +76,9 @@ Route::prefix('admin')
             Route::get('/dashboard', 'index')->name('dashboard');
             Route::get('/users', 'users')->name('users');
             Route::get('/products', 'products')->name('products');
-            Route::get('/orders', 'orders')->name('orders');
             Route::get('/products/{product}/edit', 'edit')->name('products.edit');
             Route::delete('/products/{product}', 'destroy')->name('products.destroy');
-
+            Route::get('/orders', 'orders')->name('orders');
 });
 
 
