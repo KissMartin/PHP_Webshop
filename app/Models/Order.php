@@ -51,4 +51,12 @@ class Order extends Model
             ->where('created_at', '<=', (clone $now)->subSeconds(50))
             ->update(['status' => 'shipped']);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'order_items')
+                    ->withPivot(['quantity', 'price_at_purchase'])
+                    ->withTimestamps();
+    }
+
 }

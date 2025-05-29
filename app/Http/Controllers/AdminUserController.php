@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -59,7 +60,7 @@ class AdminUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroyProduct(Product $product)
     {
         $product->delete();
         return redirect()->route('admin.profile.products')->with('success', 'Product deleted successfully.');
@@ -93,7 +94,9 @@ class AdminUserController extends Controller
 
     public function orders()
     {
-        // Logic to fetch and display orders
-        return view('admin.orders');
+        $orders = Order::with(['user', 'products'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
+        return view('admin.orders', compact('orders'));
     }
 }
