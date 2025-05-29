@@ -29,7 +29,7 @@
             <hr>
             <div class="h-8/12 p-2"> <!-- Description -->
                 <p class="text-lg text-gray-400 mb-2">Description</p>
-                <p class="text-gray-300 text-xl">{{ $product->description }} lorem*10</p>
+                <p class="text-gray-300 text-xl overflow-y-auto max-h-[26rem]"> {{ $product->description }} </p>
             </div>
             <hr>
             <div class="w-full h-2/12 flex items-center justify-center"> <!-- Add to Cart Form -->
