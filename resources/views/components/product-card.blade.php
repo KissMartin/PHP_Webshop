@@ -1,9 +1,8 @@
 <div class="bg-gray-800 p-4 rounded shadow">
     <img src="{{ $image ?? 'https://placehold.co/300?text='.$name }}" alt="{{ $name }}" class="w-full h-48 object-cover mb-4">
-    {{-- <img src="{{ 'https://placehold.co/300?text='.$name }}" alt="{{ $name }}" class="w-full h-48 object-cover mb-4"> --}}
     <h4 class="text-xl font-semibold">{{ $name }}</h4>
-    <p data-limit='90' class="shorten text-gray-500 mb-2 h-12">{{ $description }} Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem illum aliquid esse repellat minima earum consectetur pariatur et, non nesciunt voluptas! Quis iure officiis totam facere omnis magnam esse reiciendis.</p>
-    <span class="text-lg font-bold">{{ number_format($price, 2) }} $</span>
+    <p data-limit='90' class="shorten text-gray-500 mb-2 h-12">{{ $description }}</p>
+    <x-pricetag :price="$price" class="text-lg font-bold"></x-pricetag>
     @if(isset($buttonRoute))
         <form method="POST" action="{{ $buttonRoute }}">
             @csrf

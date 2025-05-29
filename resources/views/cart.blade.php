@@ -19,16 +19,20 @@
                         <div class="py-4 flex justify-between items-center">
                             <div>
                                 <p class="font-semibold text-lg">{{ $item['name'] }}</p>
-                                <p class="text-sm text-gray-400">{{ $item['quantity'] }} × ${{ number_format($item['price'], 2) }}</p>
+                                <p class="text-sm text-gray-400 w-96">
+                                    {{ $item['quantity'] }} 
+                                    x
+                                    <x-pricetag :price="$item['price']" />
+                                </p>
                             </div>
-                            <p class="text-lg font-medium">${{ number_format($item['quantity'] * $item['price'], 2) }}</p>
+                            <x-pricetag class="text-lg font-medium" :price="number_format($item['quantity'] * $item['price'], 2)" />
                         </div>
                     @endforeach
                 </div>
 
                 <div class="text-xl font-bold flex justify-between border-t border-gray-700 pt-4 mt-4">
                     <span>Total:</span>
-                    <span>${{ number_format($total, 2) }}</span>
+                    <x-pricetag :price='$total' />
                 </div>
             </div>
 
