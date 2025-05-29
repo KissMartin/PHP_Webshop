@@ -17,20 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
             HomePage();
             break;
         case "/products":
-            ProductsPage();
+            // ProductsPage();
             break;
     }
-    if(path.includes('products')) {
-    }else{
-    }
+
+    DescriptionTruncation();
+    MoreLess();
 });
 
-function ProductsPage() {
-
-    /* Description shortening */
-    const characterLimit = 70;
-
-    document.querySelectorAll('.product-description').forEach(desc => {
+function DescriptionTruncation() {
+    document.querySelectorAll('.shorten')?.forEach(desc => {
+        var characterLimit = parseInt(desc.getAttribute('data-limit')) || 100;
         var p = desc.childNodes[0];
         if (!p || p.nodeType !== Node.TEXT_NODE) {
             console.warn('No text node found in product description:', desc);
@@ -41,19 +38,27 @@ function ProductsPage() {
 
         if (p.textContent.length > characterLimit) {
             while (p.textContent.length > characterLimit && words.length > 1) {
-                words.pop();
-                p.textContent = words.join(' ') + '...';
+                words.pop(); // Remove the last word
+                p.textContent = words.join(' ') + '...'; // Add ellipsis
             }
             p.textContent = p.textContent.trim()
         }
     })
-    /* End of description shortening */
+}
 
-    /* Filters more/less */
-
+function MoreLess() {
     const categoryFilters = document.querySelectorAll('.filter-category');
     const moreFiltersButton = document.getElementById('more-filters-btn');
-    const lessFiltersButton = document.getElementById('less-filters-btn');    
+    const lessFiltersButton = document.getElementById('less-filters-btn');
+
+    if (!categoryFilters || categoryFilters.length === 0) {
+        console.warn('No category filters found on the page.');
+        return;
+    }
+    if (!moreFiltersButton || !lessFiltersButton) {
+        console.warn('More/Less filters buttons not found on the page.');
+        return;
+    }
 
     const firstShownAmount = 3;
     const incrementAmount = 6;
@@ -96,18 +101,17 @@ function ProductsPage() {
             }
         });
     });
-    /* End of filters more/less */
 }
 
+function ProductsPage() {}
+
 function HomePage(){
-    try{
-        document.getElementById('LearnMoreBtn').addEventListener('click', () => {
-            modal.open({
-                title: 'Learn More about HoneyHive',
-                content: "<video width='100%' height='auto' autoplay controls><source src='/videos/LearnMore.mp4' type='video/mp4'>Your browser does not support the video tag.</video>"
-            });
+    document.getElementById('LearnMoreBtn')?.addEventListener('click', () => {
+        modal.open({
+            title: 'Learn More about HoneyHive',
+            content: "<video width='100%' height='auto' autoplay controls><source src='/videos/LearnMore.mp4' type='video/mp4'>Your browser does not support the video tag.</video>"
         });
-    } catch (e) {}
+    });
 
     try{
         new TypeWriter("typewriter", {

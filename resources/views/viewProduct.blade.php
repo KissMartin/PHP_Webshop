@@ -10,14 +10,14 @@
     <div class="w-full h-4/5 grid grid-cols-2 space-y-2">
         <div class="">
             <h1 class="text-3xl font-bold mb-2 h-1/12">{{ $product->name }}</h1>
-            <h1 class="text-md mb-2 text-gray-500 h-1/12">Uploaded by: Jamal XL</h1>
+            <h1 class="text-md mb-2 text-gray-500 h-1/12">Uploaded by: {{ $product->author->name ?? 'Unknown' }}</h1>
             <div class="w-full pr-10 h-10/12">
                 <img src="{{ $product->image_url ?? 'https://placehold.co/300'}}" alt="{{ $product->name }}" class="w-full h-auto rounded-lg shadow-md object-cover">
             </div>
         </div>
         <div class="rounded-2xl bg-gray-800 px-10 py-5">
             <div class="flex justify-center items-center gap-10 h-2/12 p-2"> <!-- Price and stock -->
-                <div class="flex flex-col">
+                <div class="flex flex-col"> 
                     <p class="text-lg text-center text-gray-400">Price</p>
                     <p class="text-center text-2xl">{{$product->price }} $</p>
                 </div>
@@ -29,7 +29,7 @@
             <hr>
             <div class="h-8/12 p-2"> <!-- Description -->
                 <p class="text-lg text-gray-400 mb-2">Description</p>
-                <p class="text-gray-300 text-xl">{{ $product->description }} lorem*10</p>
+                <p class="text-gray-300 text-xl overflow-y-auto max-h-[26rem]"> {{ $product->description }} </p>
             </div>
             <hr>
             <div class="w-full h-2/12 flex items-center justify-center"> <!-- Add to Cart Form -->

@@ -46,6 +46,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $userDetails = $product->user()->select('id', 'name')->first();
+        $product->author = $userDetails;
         return view('viewProduct', compact('product'));
     }
 
