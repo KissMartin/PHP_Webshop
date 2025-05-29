@@ -20,6 +20,17 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <p class="text-lg">Preferred Currency: </p>
+            <select name="preferred_currency" id="preferred_currency" class="block mt-1 w-full border border-gray-300">
+                @foreach ($currencies as $currency)
+                    <option value="{{ $currency }}" @if(old('preferred_currency') == $currency) selected @endif>
+                        {{ strtoupper($currency) }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

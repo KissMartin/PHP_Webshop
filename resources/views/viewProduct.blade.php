@@ -24,7 +24,8 @@
             <div class="flex justify-center items-center gap-10 h-2/12 p-2"> <!-- Price and stock -->
                 <div class="flex flex-col"> 
                     <p class="text-lg text-center text-gray-400">Price</p>
-                    <p class="text-center text-2xl">{{$product->price }} $</p>
+                    <x-pricetag :price="$product->price" class="text-2xl text-center"></x-pricetag>
+                    {{-- <p class="text-center text-2xl">{{$product->price }} $</p> --}}
                 </div>
                 <div class="flex flex-col">
                     <p class="text-lg text-center text-gray-400">Avaliable Stock</p>

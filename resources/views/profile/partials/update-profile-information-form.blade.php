@@ -47,6 +47,18 @@
             @endif
         </div>
 
+        <div>
+            <p class="text-lg">Preferred Currency: </p>
+            <select name="preferred_currency" id="preferred_currency" class="block mt-1 w-full border border-gray-300">
+                @use('\App\Http\Controllers\CurrencyController')
+                @foreach (CurrencyController::GetAllCurrencies() as $currency)
+                    <option value="{{ $currency }}" @if(old('preferred_currency', $user->preferred_currency) == $currency) selected @endif>
+                        {{ $currency }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
