@@ -17,11 +17,18 @@ class AdminUserController extends Controller
         $customers = User::count();
         $orders = Order::count();
         $products = Product::count();
-        $revenue = Order::where('status', 'paid')->sum('total_price');
+
+        $totalPaid = Order::where('status', 'paid')->sum('total_price');
+        $revenue = $totalPaid * 0.15;
+        
+        $adRevenue = rand(200, 800);
+
         $visitors = rand(1200, 3500);
         $visitorChart = collect(range(1, 30))->map(fn() => rand(20, 100))->toArray();
 
-        return view('admin.dashboard', compact('customers', 'orders', 'products', 'revenue', 'visitors', 'visitorChart'));
+        return view('admin.dashboard', compact(
+            'customers', 'orders', 'products', 'revenue', 'adRevenue', 'visitors', 'visitorChart'
+        ));
     }
 
     /**
