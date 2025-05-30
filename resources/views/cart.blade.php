@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
+
+<x-cart-error-popup :message="session('cart_error')" />
+
 <section class="min-h-screen bg-gray-900 py-20 pt-24 text-white">
     <div class="container mx-auto px-4 max-w-6xl">
         <h1 class="text-4xl font-bold mb-12 text-center">Checkout</h1>
@@ -15,17 +18,33 @@
                 <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Order Summary</h2>
 
                 <div class="overflow-y-auto grow divide-y divide-gray-700">
-                    @foreach ($cartItems as $item)
+                    @foreach ($cartItems as $productId => $item)
                         <div class="py-4 flex justify-between items-center">
                             <div>
                                 <p class="font-semibold text-lg">{{ $item['name'] }}</p>
                                 <p class="text-sm text-gray-400">{{ $item['quantity'] }} × ${{ number_format($item['price'], 2) }}</p>
                             </div>
-                            <p class="text-lg font-medium">${{ number_format($item['quantity'] * $item['price'], 2) }}</p>
+                            <div class="flex items-center gap-4">
+                                <p class="text-lg font-medium">${{ number_format($item['quantity'] * $item['price'], 2) }}</p>
+                                <form action="{{ route('cart.destroy', $productId) }}" method="POST" onsubmit="return confirm('Remove this item from cart?');" class="flex items-center gap-2">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        min="1"
+                                        max="{{ $item['quantity'] }}"
+                                        value="1"
+                                        class="w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none"
+                                    >
+                                    <button type="submit" class="ml-2 px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-white text-xs">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     @endforeach
                 </div>
-
                 <div class="text-xl font-bold flex justify-between border-t border-gray-700 pt-4 mt-4">
                     <span>Total:</span>
                     <span>${{ number_format($total, 2) }}</span>

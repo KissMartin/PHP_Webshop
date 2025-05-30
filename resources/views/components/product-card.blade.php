@@ -18,5 +18,4 @@
             </x-primary-button>
         </form>
     @endif
-
 </div>

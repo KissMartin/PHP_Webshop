@@ -1,4 +1,3 @@
-{{-- filepath: resources/views/admin/dashboard.blade.php --}}
 @extends('layouts.layout')
 
 @section('content')
@@ -6,7 +5,6 @@
     <div class="container mx-auto px-4 max-w-7xl">
         <h1 class="text-4xl font-bold mb-10 text-center">Admin Dashboard</h1>
 
-        <!-- Quick Action Buttons -->
         <div class="flex flex-wrap justify-center gap-6 mb-10">
             <a href="{{ route('admin.orders') }}" class="px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold shadow transition">
                 <i class="fa fa-shopping-bag mr-2"></i> All Orders
@@ -20,31 +18,26 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-            <!-- Customers -->
             <div class="bg-gray-800 rounded-xl p-6 shadow flex flex-col items-center">
                 <div class="text-5xl mb-2 text-orange-400"><i class="fa fa-users"></i></div>
                 <div class="text-3xl font-bold">{{ $customers }}</div>
                 <div class="text-gray-400 mt-1">Customers</div>
             </div>
-            <!-- Orders -->
             <div class="bg-gray-800 rounded-xl p-6 shadow flex flex-col items-center">
                 <div class="text-5xl mb-2 text-green-400"><i class="fa fa-shopping-bag"></i></div>
                 <div class="text-3xl font-bold">{{ $orders }}</div>
                 <div class="text-gray-400 mt-1">Orders</div>
             </div>
-            <!-- Products -->
             <div class="bg-gray-800 rounded-xl p-6 shadow flex flex-col items-center">
                 <div class="text-5xl mb-2 text-blue-400"><i class="fa fa-cube"></i></div>
                 <div class="text-3xl font-bold">{{ $products }}</div>
                 <div class="text-gray-400 mt-1">Products</div>
             </div>
-            <!-- Gross Revenue (15% of paid orders) -->
             <div class="bg-gray-800 rounded-xl p-6 shadow flex flex-col items-center">
                 <div class="text-5xl mb-2 text-blue-400"><i class="fa fa-money"></i></div>
                 <div class="text-3xl font-bold">${{ number_format($revenue, 2) }}</div>
                 <div class="text-gray-400 mt-1">Gross Revenue</div>
             </div>
-            <!-- Ad Revenue -->
             <div class="bg-gray-800 rounded-xl p-6 shadow flex flex-col items-center">
                 <div class="text-5xl mb-2 text-pink-400"><i class="fa fa-bullhorn"></i></div>
                 <div class="text-3xl font-bold">${{ number_format($adRevenue, 2) }}</div>
@@ -55,7 +48,6 @@
             <div class="text-2xl font-bold mb-2">Site Visitors (This Month)</div>
             <div class="text-5xl font-bold text-purple-400 mb-4">{{ $visitors }}</div>
             <div class="w-full h-32 bg-gray-900 rounded-lg flex items-end overflow-hidden">
-                <!-- Fake visitor chart bars -->
                 @foreach($visitorChart as $bar)
                     <div class="flex-1 mx-1 bg-purple-500 rounded-t" style="height: {{ $bar }}%;"></div>
                 @endforeach

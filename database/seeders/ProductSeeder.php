@@ -14,6 +14,8 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        $userIds = \App\Models\User::pluck('id')->all();
+
         $products = [
             [
                 'user_id' => 1,
@@ -336,6 +338,11 @@ class ProductSeeder extends Seeder
                 'image_url' => 'https://placehold.co/150?text=Phone+Stand'
             ]
         ];
+
+        foreach ($products as &$product) {
+            $product['user_id'] = $userIds[array_rand($userIds)];
+        }
+        unset($product);
 
         DB::table('products')->insert($products);
     }

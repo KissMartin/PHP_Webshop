@@ -25,7 +25,7 @@ Route::controller(CartController::class)->prefix('cart')->group(function () {
     Route::get('/', 'index')->name('cart');
     Route::post('/', 'createOrder')->name('cart.create');
     Route::post('/add/{product}', 'store')->name('cart.store');
-    Route::delete('/remove/{product}', 'destroy')->name('cart.destroy');
+    Route::delete('delete/{product}', 'destroy')->name('cart.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->get('/home', [HomeController::class, 'index']);
