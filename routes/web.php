@@ -25,7 +25,7 @@ Route::controller(CartController::class)->prefix('cart')->group(function () {
     Route::get('/', 'index')->name('cart');
     Route::post('/', 'createOrder')->name('cart.create');
     Route::post('/add/{product}', 'store')->name('cart.store');
-    Route::delete('/remove/{product}', 'destroy')->name('cart.destroy');
+    Route::delete('delete/{product}', 'destroy')->name('cart.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->get('/home', [HomeController::class, 'index']);
@@ -53,6 +53,7 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/orders', 'index')->name('orders');
         Route::patch('/orders/{order}/cancel', 'cancel')->name('orders.cancel');
+        Route::patch('/orders/{order}/pay', 'payNow')->name('orders.pay');
         Route::patch('/orders/{order}', 'updateStatus')->name('orders.update-status');
     });
 

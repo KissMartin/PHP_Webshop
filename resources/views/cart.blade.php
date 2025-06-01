@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
+
+<x-cart-error-popup :message="session('cart_error')" />
+
 <section class="min-h-screen bg-gray-900 py-20 pt-24 text-white">
     <div class="container mx-auto px-4 max-w-6xl">
         <h1 class="text-4xl font-bold mb-12 text-center">Checkout</h1>
@@ -9,13 +12,14 @@
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center text-lg text-gray-400">
                 Your cart is empty.
             </div>
-        @else
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            @else
+            {{-- TODO: Width, pricetag --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col h-[600px]">
                 <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Order Summary</h2>
 
                 <div class="overflow-y-auto grow divide-y divide-gray-700">
-                    @foreach ($cartItems as $item)
+                    @foreach ($cartItems as $productId => $item)
                         <div class="py-4 flex justify-between items-center">
                             <div>
                                 <p class="font-semibold text-lg">{{ $item['name'] }}</p>
@@ -25,18 +29,36 @@
                                     <x-pricetag :price="$item['price']" />
                                 </p>
                             </div>
-                            <x-pricetag class="text-lg font-medium" :price="number_format($item['quantity'] * $item['price'], 2)" />
+                            {{-- <x-pricetag class="text-lg font-medium" :price="number_format($item['quantity'] * $item['price'], 2)" /> --}}
+                            <div class="flex items-center gap-4">
+                                <p class="text-lg font-medium">${{ number_format($item['quantity'] * $item['price'], 2) }}</p>
+                                <form action="{{ route('cart.destroy', $productId) }}" method="POST" onsubmit="return confirm('Remove this item from cart?');" class="flex items-center gap-2">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        min="1"
+                                        max="{{ $item['quantity'] }}"
+                                        value="1"
+                                        class="w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none"
+                                    >
+                                    <button type="submit" class="ml-2 px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-white text-xs">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     @endforeach
                 </div>
-
                 <div class="text-xl font-bold flex justify-between border-t border-gray-700 pt-4 mt-4">
                     <span>Total:</span>
                     <x-pricetag :price='$total' />
                 </div>
             </div>
 
-            <form action="{{ route('cart.create') }}" method="POST" class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <form action="{{ route('cart.create') }}" method="POST" class="bg-gray-800 p-6 rounded-lg shadow-lg"
+                  x-data="{ payment: 'card' }">
                 @csrf
 
                 <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">Billing Details</h2>
@@ -65,37 +87,54 @@
 
                 <h2 class="text-2xl font-semibold mt-8 mb-4 border-b border-gray-700 pb-2">Payment Info</h2>
 
+                {{-- TODO: Styling --}}
                 <div class="space-y-4">
-                    <div>
-                        <x-input-label for="card_name" :value="__('Cardholder Name')" />
-                        <x-text-input id="card_name" name="card_name"
-                            class="w-full" required />
-                    </div>
-
-                    <div>
-                        <x-input-label for="card_number" :value="__('Card Number')" />
-                        <x-text-input id="card_number" name="card_number"
-                            class="w-full" required />
-                    </div>
-
                     <div class="flex space-x-4">
-                        <div class="w-1/2">
-                            <x-input-label for="expiry" :value="__('Expiry Date (MM/YY)')" />
-                            <x-text-input id="expiry" name="expiry" placeholder="MM/YY"
-                                class="w-full" required />
-                        </div>
-                        <div class="w-1/2">
-                            <x-input-label for="cvv" :value="__('CVV')" />
-                            <x-text-input id="cvv" name="cvv"
-                                class="w-full" required />
+                        <label class="block text-sm font-medium mb-2">Payment Method</label>
+                        <div class="flex gap-6">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="payment_method" value="card" x-model="payment" checked>
+                                <span>Card</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="payment_method" value="cash" x-model="payment">
+                                <span>Pay later with Cash</span>
+                            </label>
                         </div>
                     </div>
 
-                    <button type="submit"
-                        class="w-full py-3 mt-6 bg-orange-500 hover:bg-orange-600 rounded text-white font-semibold transition">
-                        Place Order
-                    </button>
+                    <div x-show="payment === 'card'" x-cloak>
+                        <div>
+                            <label for="card_name" class="block text-sm font-medium mb-1">Cardholder Name</label>
+                            <input type="text" id="card_name" name="card_name"
+                                class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                        </div>
+
+                        <div>
+                            <label for="card_number" class="block text-sm font-medium mb-1">Card Number</label>
+                            <input type="text" id="card_number" name="card_number"
+                                class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="expiry" class="block text-sm font-medium mb-1">Expiry Date</label>
+                                <input type="text" id="expiry" name="expiry" placeholder="MM/YY"
+                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                            </div>
+                            <div class="w-1/2">
+                                <label for="cvv" class="block text-sm font-medium mb-1">CVV</label>
+                                <input type="text" id="cvv" name="cvv"
+                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <button type="submit"
+                    class="w-full py-3 mt-6 bg-orange-500 hover:bg-orange-600 rounded text-white font-semibold transition">
+                    Place Order
+                </button>
             </form>
         </div>
         @endif

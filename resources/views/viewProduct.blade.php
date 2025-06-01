@@ -6,6 +6,8 @@
 
 <x-auth-required-popup />
 
+<x-cart-error-popup :message="session('cart_error')" />
+
 <div class="w-7xl h-screen mx-auto flex items-center p-4">
     <div class="w-full h-4/5 grid grid-cols-2 space-y-2">
         <div class="">
@@ -40,13 +42,27 @@
             </div>
             <hr>
             <div class="w-full h-2/12 flex items-center justify-center"> <!-- Add to Cart Form -->
-                <form action="{{ route('cart.store', $product->id) }}" method="POST" class="w-full max-w-xs p-2 mx-auto">
-                    @csrf
-                    <x-primary-button class="w-full">
-                        <i class="fa fa-2x fa-cart-plus mr-2"></i>
-                        Add to Cart
-                    </x-primary-button>
-                </form>
+                @if($product->stock > 0)
+                    <form action="{{ route('cart.store', $product->id) }}" method="POST" class="w-full max-w-xs p-2 mx-auto flex items-center gap-2">
+                        @csrf
+                        <input
+                            type="number"
+                            name="quantity"
+                            min="1"
+                            max="{{ $product->stock }}"
+                            value="1"
+                            class="w-20 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none"
+                        >
+                        <x-primary-button class="w-full">
+                            <i class="fa fa-2x fa-cart-plus mr-2"></i>
+                            Add to Cart
+                        </x-primary-button>
+                    </form>
+                @else
+                    <button class="w-full max-w-xs p-2 mx-auto bg-gray-600 text-gray-300 rounded-lg cursor-not-allowed opacity-60" disabled>
+                        Out of Stock
+                    </button>
+                @endif
             </div>
         </x-defaults.backdrop>
     </div>

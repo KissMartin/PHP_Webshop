@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'status', 'total_price'];
+    protected $fillable = ['user_id', 'status', 'total_price', 'payment_method'];
 
     public function user()
     {
@@ -44,10 +44,12 @@ class Order extends Model
         $now = now();
 
         static::where('status', 'pending')
+            ->where('payment_method', 'card')
             ->where('created_at', '<=', (clone $now)->subSeconds(10))
             ->update(['status' => 'paid']);
 
         static::where('status', 'paid')
+            ->where('payment_method', 'card')
             ->where('created_at', '<=', (clone $now)->subSeconds(50))
             ->update(['status' => 'shipped']);
     }

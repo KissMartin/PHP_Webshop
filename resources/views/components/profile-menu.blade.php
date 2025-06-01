@@ -8,6 +8,9 @@
 
     <x-slot name="content">
         @admin
+            <x-dropdown-link :href="route('admin.dashboard')">
+                {{ __('Dashboard') }}
+            </x-dropdown-link>
             <x-dropdown-link :href="route('admin.users')">
                 {{ __('List Users') }}
             </x-dropdown-link>

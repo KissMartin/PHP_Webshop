@@ -47,6 +47,7 @@ class CartController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'address' => 'required|string|max:1000',
+            'payment_method' => 'required|in:card,cash',
         ]);
 
         $userId = auth()->id();
@@ -75,6 +76,7 @@ class CartController extends Controller
                 'user_id' => $user->id,
                 'status' => 'pending',
                 'total_price' => $totalPrice,
+                'payment_method' => $validated['payment_method'],
             ]);
             Log::info('Order created successfully', ['order_id' => $order->id]);
 
@@ -85,6 +87,12 @@ class CartController extends Controller
                     'quantity' => $item['quantity'],
                     'price_at_purchase' => $item['price'],
                 ]);
+
+                $product = Product::find($productId);
+                if ($product) {
+                    $product->stock = max(0, $product->stock - $item['quantity']);
+                    $product->save();
+                }
             }
 
             DB::commit();
@@ -110,7 +118,7 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Product $product)
+    public function store(Request $request, Product $product)
     {
         if (!auth()->check()) {
             session()->flash('auth_required', true);
@@ -118,13 +126,21 @@ class CartController extends Controller
         }
 
         $userId = auth()->id();
-
         $cart = session()->get("cart_user_{$userId}", []);
 
+        $requestedQty = isset($request) && $request->has('quantity') ? max(1, (int) $request->input('quantity')) : 1;
+        $currentQty = isset($cart[$product->id]) ? $cart[$product->id]['quantity'] : 0;
+
+        if (($currentQty + $requestedQty) > $product->stock) {
+            session()->flash('cart_error', 'Cannot add more than available stock!');
+            return redirect()->back();
+        }
+
         $cart[$product->id] = [
+            'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
-            'quantity' => isset($cart[$product->id]) ? $cart[$product->id]['quantity'] + 1 : 1,
+            'quantity' => $currentQty + $requestedQty,
         ];
 
         session()->put("cart_user_{$userId}", $cart);
@@ -164,8 +180,21 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, $productId)
     {
-        //
+        $userId = auth()->id();
+        $cart = session()->get("cart_user_{$userId}", []);
+        $qtyToRemove = max(1, (int) $request->input('quantity', 1));
+
+        if (isset($cart[$productId])) {
+            if ($cart[$productId]['quantity'] > $qtyToRemove) {
+                $cart[$productId]['quantity'] -= $qtyToRemove;
+            } else {
+                unset($cart[$productId]);
+            }
+            session()->put("cart_user_{$userId}", $cart);
+        }
+
+        return redirect()->back()->with('success', 'Item(s) removed from cart.');
     }
 }
