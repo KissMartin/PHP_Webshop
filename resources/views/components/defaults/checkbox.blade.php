@@ -1,0 +1,1 @@
+<input type="checkbox" {{$attributes->merge(['class' => 'rounded border-gray-200 shadow-sm cursor-pointer']) }}>

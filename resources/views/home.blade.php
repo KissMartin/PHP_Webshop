@@ -8,7 +8,7 @@
                     <h2 class="text-2xl cursor-pointer" id="LearnMoreBtn"><i class="fa fa-play-circle" aria-hidden="true"></i> Learn more about HoneyHive</h2>
                     <h1 class="text-5xl font-bold mt-2">The highest rated webshop of 2025</h1>
                 </div>
-                <div class="bg-gray-800 w-full flex rounded-4xl items-center justify-center">
+                <div class="w-full flex rounded-4xl items-center justify-center">
                     <x-searchbar
                         id="typewriter"
                     />

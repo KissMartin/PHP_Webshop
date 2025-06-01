@@ -24,7 +24,12 @@
                         class="flex justify-between items-center px-6 py-4 bg-gray-700 hover:bg-gray-600 cursor-pointer"
                     >
                         <div>
-                            <p class="text-lg font-semibold text-white">{{ $user->name }}</p>
+                            <p 
+                                onclick="event.stopPropagation(); window.location='{{ route('profile.public', $user) }}'"
+                                class="text-lg font-semibold text-white cursor-pointer hover:underline"
+                            >
+                                {{ $user->name }}
+                            </p>
                         </div>
                         <div>
                             <svg 

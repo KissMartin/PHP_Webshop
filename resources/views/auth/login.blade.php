@@ -27,25 +27,24 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
-        <div class="flex justify-between mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-800">{{ __('Remember me') }}</span>
-            </label>
-
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-blue-600 hover:text-blue-900 rounded-md outline-none focus:text-gray-400" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-        </div>
-
-        <div class="flex items-center justify-between mt-4">
-
-            <a class="underline text-sm text-blue-600 hover:text-blue-900 rounded-md outline-none focus:text-gray-400" href="{{ route('register') }}">
-                {{ __("Don't have an account yet?") }}
-            </a>
+        <div class="flex items-end justify-between mt-4">
+            <div>
+                <x-defaults.checkbox id="remember_me" name="remember" />
+                <x-input-label for="remember_me" class="inline-flex items-center" :value="__('Remember me')" />
+                <br>
+                @if (Route::has('password.request'))
+                    <x-defaults.link-normal href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </x-defaults.link-normal>   
+                @endif
+                <br>
+                <x-defaults.link-normal href="{{ route('register') }}">
+                    {{ __("Don't have an account yet?") }}
+                </x-defaults.link-normal>
+                {{-- <a class="underline text-sm text-blue-600 hover:text-blue-900 rounded-md outline-none focus:text-gray-400" href="{{ route('register') }}">
+                    {{ __("Don't have an account yet?") }}
+                </a> --}}
+            </div>
 
             <x-primary-button class="ms-3">
                 {{ __('Sign in') }}

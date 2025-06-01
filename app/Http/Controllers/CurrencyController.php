@@ -43,10 +43,15 @@ class CurrencyController extends Controller
         return 1.0;
     }
 
-    public static function CalculatePriceInCurrency(float $price, string $currencyCode): float
+    public static function CalculatePriceInCurrency(float $price, string $currencyCode, int $floatingPoints = 0): string
     {
+        $price = (float) $price;
         $exchangeRate = self::GetExchangeRate($currencyCode);
-        return round($price * $exchangeRate, 2);
+
+        if ($exchangeRate === 0) { return 'ERROR'; }
+        
+        $converted = round($price * $exchangeRate, $floatingPoints);
+        return number_format($converted, $floatingPoints, '.', ' ');
     }
 }
 ?>

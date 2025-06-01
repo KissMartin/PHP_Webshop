@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ProfileUpdateRequest;
 use \App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -78,10 +79,14 @@ class ProfileController extends Controller
 
     public function profile(User $user = null): View
     {
-        if($user === null) {
+        if ($user === null) {
             $user = auth()->user();
+            return redirect()->route('profile.public', $user);
         }
 
-        return view('profile.profile', compact('user'));
+        $statistics = DB::table('user_statistics')->where('user_id', $user->id)->first();
+        $products = $user->products()->get();
+
+        return view('profile.profile', compact('user', 'statistics', 'products'));
     }
 }

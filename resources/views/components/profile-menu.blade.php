@@ -1,6 +1,6 @@
 <x-dropdown width="48">
     <x-slot name="trigger">
-        <button class="inline-flex items-center text-lg px-3 border border-transparent leading-4 font-medium rounded-md hover:text-gray-400 focus:outline-none transition ease-in-out duration-150">
+        <button class="cursor-pointer inline-flex items-center text-lg px-3 border border-transparent leading-4 font-medium rounded-md hover:text-gray-400 focus:outline-none transition ease-in-out duration-150">
             <div><i class="fa fa-user"></i> {{ Auth::user()->name }}</div>
             <i class="fa fa-angle-down ml-1"></i>
         </button>
@@ -18,7 +18,8 @@
                 {{ __('List All Orders') }}
             </x-dropdown-link>
         @else
-            <x-dropdown-link :href="route('profile.profile')">
+            {{-- <x-dropdown-link :href="route('profile.profile')"> --}}
+            <x-dropdown-link :href="route('profile.public', Auth::user()->id)">
                 {{ __('Profile') }}
             </x-dropdown-link>
             <x-dropdown-link :href="route('profile.orders')">

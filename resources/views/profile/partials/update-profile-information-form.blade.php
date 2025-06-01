@@ -1,10 +1,11 @@
+@use('\App\Http\Controllers\CurrencyController')
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
@@ -48,15 +49,14 @@
         </div>
 
         <div>
-            <p class="text-lg">Preferred Currency: </p>
-            <select name="preferred_currency" id="preferred_currency" class="block mt-1 w-full border border-gray-300">
-                @use('\App\Http\Controllers\CurrencyController')
+            <x-input-label for="preferred_currency" :value="__('Preferred Currency:')" />
+            <x-select id="preferred_currency" name="preferred_currency" class="w-full">
                 @foreach (CurrencyController::GetAllCurrencies() as $currency)
                     <option value="{{ $currency }}" @if(old('preferred_currency', $user->preferred_currency) == $currency) selected @endif>
                         {{ $currency }}
                     </option>
                 @endforeach
-            </select>
+            </x-select>
         </div>
 
         <div class="flex items-center gap-4">

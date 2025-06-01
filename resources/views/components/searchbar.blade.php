@@ -25,7 +25,10 @@
         autocomplete="off"
     >
 
-    <button type="submit" class="py-2 px-5 bg-amber-700 rounded-full hover:text-gray-300 font-semibold w-3/12">
-        <i class="fa fa-search" aria-hidden="true"></i> Search
-    </button>
+    <x-defaults.primary-button-rounded class="w-3/12">
+        <i class="fa fa-search mr-1 mb-0.5" aria-hidden="true"></i> Search
+    </x-defaults.primary-button-rounded>
+    {{-- <button type="submit" class="py-2 px-5 bg-amber-700 rounded-full hover:text-gray-300 font-semibold w-3/12">
+        
+    </button> --}}
 </form>

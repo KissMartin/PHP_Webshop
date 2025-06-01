@@ -43,23 +43,23 @@
 
                 <div class="space-y-4">
                     <div>
-                        <label for="name" class="block text-sm font-medium mb-1">Full Name</label>
-                        <input type="text" id="name" name="name"
+                        <x-input-label for="name" :value="__('Full Name')" />
+                        <x-text-input id="name" name="name"
                             value="{{ old('name', auth()->user()?->name) }}"
-                            class="w-full px-4 py-2 rounded bg-gray-700 text-white" required>
+                            class="w-full" required />
                     </div>
 
                     <div>
-                        <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                        <input type="email" id="email" name="email"
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" name="email"
                             value="{{ old('email', auth()->user()?->email) }}"
-                            class="w-full px-4 py-2 rounded bg-gray-700 text-white" required>
+                            class="w-full" required />
                     </div>
 
                     <div>
-                        <label for="address" class="block text-sm font-medium mb-1">Shipping Address</label>
+                        <x-input-label for="address" :value="__('Shipping Address')" />
                         <textarea id="address" name="address" rows="3"
-                            class="w-full px-4 py-2 rounded bg-gray-700 text-white" required>{{ old('address', auth()->user()?->address ?? '') }}</textarea>
+                            class="w-full px-4 py-2 rounded-md border border-gray-600 bg-gray-800 text-white" required>{{ old('address', auth()->user()?->address ?? '') }}</textarea>
                     </div>
                 </div>
 
@@ -67,27 +67,27 @@
 
                 <div class="space-y-4">
                     <div>
-                        <label for="card_name" class="block text-sm font-medium mb-1">Cardholder Name</label>
-                        <input type="text" id="card_name" name="card_name"
-                            class="w-full px-4 py-2 rounded bg-gray-700 text-white" required>
+                        <x-input-label for="card_name" :value="__('Cardholder Name')" />
+                        <x-text-input id="card_name" name="card_name"
+                            class="w-full" required />
                     </div>
 
                     <div>
-                        <label for="card_number" class="block text-sm font-medium mb-1">Card Number</label>
-                        <input type="text" id="card_number" name="card_number"
-                            class="w-full px-4 py-2 rounded bg-gray-700 text-white" required>
+                        <x-input-label for="card_number" :value="__('Card Number')" />
+                        <x-text-input id="card_number" name="card_number"
+                            class="w-full" required />
                     </div>
 
                     <div class="flex space-x-4">
                         <div class="w-1/2">
-                            <label for="expiry" class="block text-sm font-medium mb-1">Expiry Date</label>
-                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY"
-                                class="w-full px-4 py-2 rounded bg-gray-700 text-white" required>
+                            <x-input-label for="expiry" :value="__('Expiry Date (MM/YY)')" />
+                            <x-text-input id="expiry" name="expiry" placeholder="MM/YY"
+                                class="w-full" required />
                         </div>
                         <div class="w-1/2">
-                            <label for="cvv" class="block text-sm font-medium mb-1">CVV</label>
-                            <input type="text" id="cvv" name="cvv"
-                                class="w-full px-4 py-2 rounded bg-gray-700 text-white" required>
+                            <x-input-label for="cvv" :value="__('CVV')" />
+                            <x-text-input id="cvv" name="cvv"
+                                class="w-full" required />
                         </div>
                     </div>
 

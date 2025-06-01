@@ -4,11 +4,6 @@
     @endphp
     <div class="container mx-auto flex justify-between items-center h-12">
         <h1 class="text-3xl font-bold"><a href="/" class="py-2 px-5 hover:text-gray-400">HoneyHive</a></h1>
-        {{-- @if (Route::currentRouteName() === 'products')
-            <div class="w-1/2">
-                <x-searchbar/>
-            </div>
-        @endif --}}
         <ul class="flex space-x-4 text-lg">
             <li><a href="{{ route('products') }}" class="py-2 px-5 hover:text-gray-400"><i class="fa fa-cube"></i> Products</a></li>
             <li><a href="{{ route('cart') }}" class="py-2 px-5 hover:text-gray-400"><i class="fa fa-shopping-cart"></i> Cart</a></li>
@@ -16,7 +11,9 @@
                 <x-profile-menu />
             @else
                 <li><a href="{{ route('login', ['redirect' => $currentUrl]) }}" class="py-2 px-5 hover:text-gray-400 font-semibold"><i class="fa fa-user"></i> Sign in</a></li>
-                <li><a href="{{ route('register', ['redirect' => $currentUrl]) }}" class="py-2 px-5 bg-amber-700 rounded-full hover:text-gray-300 font-semibold">Create Account</a></li>
+                <li>
+                    <x-defaults.link-background href="{{ route('register', ['redirect' => $currentUrl]) }}" class="font-semibold">Craete Account</x-defaults.link-background>
+                </li>
             @endif
         </ul>
     </div>

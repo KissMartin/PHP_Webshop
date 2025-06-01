@@ -21,14 +21,14 @@
         </div>
 
         <div class="mt-4">
-            <p class="text-lg">Preferred Currency: </p>
-            <select name="preferred_currency" id="preferred_currency" class="block mt-1 w-full border border-gray-300">
+            <x-input-label for="preferred_currency" :value="__('Preferred Currency')" />
+            <x-select id="preferred_currency" name="preferred_currency" class="w-full">
                 @foreach ($currencies as $currency)
-                    <option value="{{ $currency }}" @if(old('preferred_currency') == $currency) selected @endif>
+                    <option value="{{ $currency }}" @if(old('preferred_currency', 'usd') == $currency) selected @endif>
                         {{ strtoupper($currency) }}
                     </option>
                 @endforeach
-            </select>
+            </x-select>            
         </div>
 
         <!-- Password -->
