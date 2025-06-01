@@ -59,9 +59,9 @@
                         </x-primary-button>
                     </form>
                 @else
-                    <button class="w-full max-w-xs p-2 mx-auto bg-gray-600 text-gray-300 rounded-lg cursor-not-allowed opacity-60" disabled>
+                    <x-secondary-button class="block w-full mt-2 text-4xl opacity-50 cursor-not-allowed" disabled>
                         Out of Stock
-                    </button>
+                    </x-secondary-button>
                 @endif
             </div>
         </x-defaults.backdrop>

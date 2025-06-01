@@ -6,10 +6,12 @@ import Modal from './modal.js';
 
 window.Alpine = Alpine;
 
+let modal;
+
 Alpine.start();
 
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = new Modal();
+    modal = new Modal();
 
     var path = window.location.pathname;
     switch(path){

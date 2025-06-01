@@ -74,7 +74,6 @@ if ($user == null) {
                 @else                    
                     <div class="w-full grid grid-cols-3 gap-8 m-4">
                         @foreach ($products as $product)
-                            {{-- @dd($product); --}}
                             <a href="{{ route('product.show', $product->id) }}" class="block">
                                 <x-product-card 
                                     :name="$product->name"
@@ -82,6 +81,7 @@ if ($user == null) {
                                     :price="$product->price"
                                     :image="$product->image_url"
                                     :buttonRoute="route('cart.store', $product->id)"
+                                    :stock="$product->stock"
                                 />
                             </a>
                         @endforeach
@@ -93,5 +93,3 @@ if ($user == null) {
     </div>
 </div>
 @endsection
-
-{{-- @dd($statistics); --}}
