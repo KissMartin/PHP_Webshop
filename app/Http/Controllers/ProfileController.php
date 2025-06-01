@@ -89,4 +89,9 @@ class ProfileController extends Controller
 
         return view('profile.profile', compact('user', 'statistics', 'products'));
     }
+
+    public function defaultProfile(){
+        $user = auth()->user();
+        return redirect()->route('profile.public', ['user' => $user->id]);
+    }
 }
