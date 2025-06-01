@@ -49,10 +49,6 @@
 ### Setup
 
 1. **Clone the repository**
-    ```sh
-    git clone <your-repo-url>
-    cd PHP_Webshop
-    ```
 
 2. **Install dependencies and set up the environment**
     - Run the setup script (recommended):

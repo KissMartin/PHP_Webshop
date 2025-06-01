@@ -60,6 +60,7 @@
                                 :price="$product->price"
                                 :image="$product->image_url"
                                 :buttonRoute="route('cart.store', $product->id)"
+                                :stock="$product->stock"
                             />
                         </a>
                     @endforeach
