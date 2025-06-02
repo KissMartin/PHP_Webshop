@@ -88,7 +88,8 @@
                     {{-- TODO: Styling --}}
                     <div class="space-y-4">
                         <div class="flex space-x-4">
-                            <label class="block text-sm font-medium mb-2">Payment Method</label>
+                            <x-input-label :value="__('Payment Method:')" />
+                            {{-- <label class="block text-sm font-medium mb-2">Payment Method</label> --}}
                             <div class="flex gap-6">
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="payment_method" value="card" x-model="payment" checked>
@@ -101,29 +102,28 @@
                             </div>
                         </div>
 
-                        <div x-show="payment === 'card'" x-cloak>
+                        <div x-show="payment === 'card'" x-cloak class="space-y-4">
                             <div>
-                                <label for="card_name" class="block text-sm font-medium mb-1">Cardholder Name</label>
-                                <input type="text" id="card_name" name="card_name"
-                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                                <x-input-label for="card_name" :value="__('Cardholder Name')" />
+                                <x-text-input id="card_name" name="card_name" class="w-full" x-bind:required="payment === 'card'" />
                             </div>
 
                             <div>
-                                <label for="card_number" class="block text-sm font-medium mb-1">Card Number</label>
-                                <input type="text" id="card_number" name="card_number"
-                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                                <x-input-label for="card_number" :value="__('Card Number')" />
+                                <x-text-input id="card_number" name="card_number"
+                                    class="w-full" x-bind:required="payment === 'card'" />
                             </div>
 
                             <div class="flex space-x-4">
                                 <div class="w-1/2">
-                                    <label for="expiry" class="block text-sm font-medium mb-1">Expiry Date</label>
-                                    <input type="text" id="expiry" name="expiry" placeholder="MM/YY"
-                                        class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                                    <x-input-label for="expiry" :value="__('Expiry Date')" />
+                                    <x-text-input id="expiry" name="expiry" placeholder="MM/YY"
+                                        class="w-full" x-bind:required="payment === 'card'" />
                                 </div>
                                 <div class="w-1/2">
-                                    <label for="cvv" class="block text-sm font-medium mb-1">CVV</label>
-                                    <input type="text" id="cvv" name="cvv"
-                                        class="w-full px-4 py-2 rounded bg-gray-700 text-white" x-bind:required="payment === 'card'">
+                                    <x-input-label for="cvv" :value="__('CVV')" />
+                                    <x-text-input id="cvv" name="cvv"
+                                        class="w-full" x-bind:required="payment === 'card'" />
                                 </div>
                             </div>
                         </div>
@@ -132,10 +132,6 @@
                     <x-primary-button class="w-full mt-6 font-semibold">
                         Place Order
                     </x-primary-button>
-                    {{-- <button type="submit"
-                        class="w-full py-3 mt-6 bg-orange-500 hover:bg-orange-600 rounded text-white font-semibold transition">
-                        Place Order
-                    </button> --}}
                 </form>
             </div>
         @endif

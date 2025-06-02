@@ -40,8 +40,12 @@ Route::middleware('auth')
             Route::get('/edit', 'edit')->name('edit');
             Route::patch('/', 'update')->name('update')->middleware('throttle:5,1');
             Route::delete('/', 'destroy')->name('destroy')->middleware('throttle:3,1');
-            Route::get('/{user}', 'profile')->where('user', '[0-9]+')->name('public');
-});
+        }
+);
+
+Route::get('/profile/{user}', [ProfileController::class, 'profile'])
+    ->where('user', '[0-9]+')
+    ->name('profile.public');
 
 Route::middleware(['auth', 'verified'])
     ->prefix('profile')
